@@ -1,15 +1,7 @@
 <div class="container">
   <app-add-wish-form (addWish)="items.push($event)"></app-add-wish-form>
 
-  <div>
-    <div>
-      <select [(ngModel)]="listFilter">
-        <option value="0">All</option>
-        <option value="1">Unfulfilled</option>
-        <option value="2">Fulfilled</option>
-      </select>
-    </div>
-  </div>
+  <app-wish-filter [(filter)]="filter"></app-wish-filter>
 
-  <app-wise-list [items]="visibleItems" />
+  <app-wise-list [items]="items.filter(filter)" />
 </div>
