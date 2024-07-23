@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { WishItem } from '../shared/models/wishItem';
 import { CommonModule } from '@angular/common';
@@ -22,12 +22,8 @@ import { EventService } from './../shared/services/EventService';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
-  items = [
-    new WishItem('To Learn Angular'),
-    new WishItem('Get coffee', true),
-    new WishItem('Find grass that cuts itself'),
-  ];
+export class AppComponent implements OnInit {
+  items: WishItem[] = [];
 
   filter: any;
 
@@ -37,5 +33,18 @@ export class AppComponent {
       let index = this.items.indexOf(wish);
       this.items.splice(index, 1);
     });
+  }
+
+  async ngOnInit() {
+    try {
+      const response = await fetch('http://localhost:3000/wishes');
+      if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+      }
+      const data: WishItem[] = await response.json();
+      this.items = data;
+    } catch (error) {
+      console.error('There was a problem with the fetch operation:', error);
+    }
   }
 }
