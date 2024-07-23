@@ -2,10 +2,10 @@
   <label>
     <input
       type="checkbox"
-      [checked]="fullfilled"
+      [checked]="wish.isComplete"
       (click)="toggleFullFilled()"
     />
-    {{ wishText }}
+    {{ wish.wishText }}
   </label>
   <button (click)="removeWish()">Remove</button>
 </div>
