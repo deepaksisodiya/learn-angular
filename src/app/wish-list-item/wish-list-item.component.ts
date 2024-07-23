@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import events from './../../shared/services/EventService';
 
 @Component({
   selector: 'app-wish-list-item',
@@ -21,5 +22,9 @@ export class WishListItemComponent {
 
   get cssClasses() {
     return { 'strikeout text-muted': this.fullfilled };
+  }
+
+  removeWish() {
+    events.emit('removeWish', this.wishText);
   }
 }

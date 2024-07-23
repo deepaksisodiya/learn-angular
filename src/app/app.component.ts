@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { WiseListComponent } from './wise-list/wise-list.component';
 import { AddWishFormComponent } from './add-wish-form/add-wish-form.component';
 import { WishFilterComponent } from './wish-filter/wish-filter.component';
+import events from './../shared/services/EventService';
 
 @Component({
   selector: 'app-root',
@@ -29,4 +30,10 @@ export class AppComponent {
   ];
 
   filter: any;
+
+  constructor() {
+    events.listen('removeWish', (wish: any) => {
+      console.log(wish);
+    });
+  }
 }
