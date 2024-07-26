@@ -15,4 +15,8 @@ export class AppComponent {
   goToContact() {
     this.router.navigate(['second']);
   }
+
+  goToWishList() {
+    this.router.navigate(['first']);
+  }
 }
